@@ -4,7 +4,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "build:ea-php83": "PHP_BINARY=ea-php83 vite build",
+        "build:ea-php83": "alias php='ea-php83' vite build",
         "build:ssr": "vite build && vite build --ssr",
         "dev": "vite",
         "format": "prettier --write resources/",
