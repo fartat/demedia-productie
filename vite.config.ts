@@ -18,6 +18,7 @@ export default defineConfig({
         }),
         tailwindcss(),
         wayfinder({
+            command: 'ea-php83 artisan wayfinder:generate --with-form',
             formVariants: true,
         }),
     ],
