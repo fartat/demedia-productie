@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\SpeedTest;
 use App\Models\User;
 use Illuminate\Console\Command;
 
@@ -12,7 +13,7 @@ class EventCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'event {--delete}';
+    protected $signature = 'event';
 
     /**
      * The console command description.
@@ -26,15 +27,6 @@ class EventCommand extends Command
      */
     public function handle()
     {
-        if($this->option('delete')){
-            $id = User::query()->latest()->first();
-            $id->delete();
-
-            $this->info("User deleted with ID: {$id->id}");
-
-            return;
-        }
-        $user = User::factory()->create();
-        $this->info("User created with ID: {$user->id}");
+        event(new SpeedTest());
     }
 }

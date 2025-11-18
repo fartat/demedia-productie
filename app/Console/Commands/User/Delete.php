@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\User;
 
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class Delete extends Command
@@ -11,7 +12,7 @@ class Delete extends Command
      *
      * @var string
      */
-    protected $signature = 'user:delete {id}';
+    protected $signature = 'user:delete {id?}';
 
     /**
      * The console command description.
@@ -25,7 +26,7 @@ class Delete extends Command
      */
     public function handle()
     {
-        $id = $this->argument('id');
+        $id = $this->argument('id') ?: $this->ask('Introduceți ID-ul utilizatorului de șters', User::latest()->first()->id);
 
         $user = \App\Models\User::find($id);
 

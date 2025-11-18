@@ -17,7 +17,8 @@ class Create extends Command
                             {name?}
                             {email?}
                             {password?}
-                            {--admin : Whether the user should be created as an admin}';
+                            {--admin : Whether the user should be created as an admin}
+                            {--factory : Whether to create a user using the factory}';
 
     /**
      * The console command description.
@@ -31,6 +32,12 @@ class Create extends Command
      */
     public function handle()
     {
+        if ($this->option('factory')) {
+            $user = User::factory()->create();
+            $this->info("Utilizatorul a fost creat cu succes: ID {$user->id}");
+            return;
+        }
+
         $name = $this->argument('name') ?: $this->ask('Introduceți numele utilizatorului');
 
         $emailPropose = strtolower(str_replace(' ', '.', $name)) . '@demedia.ro';

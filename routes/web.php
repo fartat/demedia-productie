@@ -20,6 +20,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
+Route::get('phpinfo', function () {
+    phpinfo();
+});
+
 
 
 
