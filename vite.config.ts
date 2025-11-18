@@ -26,10 +26,7 @@ export default defineConfig(({ mode }) => {
                 },
             }),
             tailwindcss(),
-            wayfinder({
-                formVariants: true,
-                command: 'ea-php83 artisan wayfinder:generate --with-form',
-            }),
+            wayfinder(cmdWayfinder),
         ].filter(Boolean),
         esbuild: {
             jsx: 'automatic',
