@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
     };
     if (mode !== 'development') {
         cmdWayfinder['command'] =
-            'ea-php83 artisan wayfinder:generate --with-form --force';
+            'ea-php83 artisan wayfinder:generate --with-form';
     }
 
     return {
@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => {
             tailwindcss(),
             wayfinder({
                 formVariants: true,
-                command: 'ea-php83 artisan wayfinder:generate --with-form --force',
+                command: 'ea-php83 artisan wayfinder:generate --with-form',
             }),
         ].filter(Boolean),
         esbuild: {
