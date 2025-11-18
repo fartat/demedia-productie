@@ -26,6 +26,7 @@ class EventCommand extends Command
      */
     public function handle()
     {
+        event(new \App\Events\UserCreated(new User(['name' => 'Test User', 'email' => 'test'])));
         if($this->option('delete')){
             $id = User::query()->latest()->first();
             $id->delete();
