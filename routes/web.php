@@ -6,9 +6,7 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::get('/', function () {
-    return Inertia::render('welcome', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
+    return Inertia::render('auth/login');
 })->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -17,9 +15,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'componenta_laravel_version' => app()->version(),
         ]);
     })->name('dashboard');
+
+    Route::resource('users', UserController::class)->except(['show']);
+
 });
 
-Route::resource('users', UserController::class)->except(['show']);
 
 
 

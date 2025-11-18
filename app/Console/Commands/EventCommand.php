@@ -27,9 +27,14 @@ class EventCommand extends Command
     public function handle()
     {
         if($this->option('delete')){
-            User::query()->latest()->first()->delete();
+            $id = User::query()->latest()->first();
+            $id->delete();
+
+            $this->info("User deleted with ID: {$id->id}");
+
             return;
         }
         $user = User::factory()->create();
+        $this->info("User created with ID: {$user->id}");
     }
 }

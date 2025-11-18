@@ -3,7 +3,9 @@ import AppLayout from '@/layouts/app-layout';
 import userRoute from '@/routes/users';
 import { type BreadcrumbItem } from '@/types';
 import { Head, router, usePage } from '@inertiajs/react';
-import { useEcho,useEchoPublic } from '@laravel/echo-react';
+import { useEcho } from '@laravel/echo-react';
+
+import { Table, TableCell, TableHeadCell, TableHeader, TableRow, TableBody } from '@/components/ui/table';
 
 type User = {
     id: number;
@@ -51,13 +53,6 @@ export default function Users({ users }: UsersProps) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Users" />
-            {errors && (
-                <div className="mb-4 rounded-lg bg-red-500 p-4 text-sm text-white">
-                    {Object.values(errors).map((error, index) => (
-                        <div key={index}>{error}</div>
-                    ))}
-                </div>
-            )}
 
             <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
                 <div className="grid auto-rows-min gap-4 md:grid-cols-3">
