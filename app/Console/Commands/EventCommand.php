@@ -13,7 +13,7 @@ class EventCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'event';
+    protected $signature = 'event {--count=1}';
 
     /**
      * The console command description.
@@ -27,6 +27,10 @@ class EventCommand extends Command
      */
     public function handle()
     {
-        event(new SpeedTest());
+        $count = (int)$this->option('count');
+
+        for ($i = 0; $i < $count; $i++) {
+            event(new SpeedTest());
+        }
     }
 }
