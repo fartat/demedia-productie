@@ -59,3 +59,14 @@ Homestead.json
 .phpactor.json
 auth.json
 >>>>>>> e61c7264590f4d4daa29975b5571aa4e34370565
+
+ws/
+public/php.ini
+public/Xinfo.php
+public/.user.ini
+public/.htaccess
+Xinfo.php
+.user.ini
+php.ini
+.htaccess
+package-lock.json
