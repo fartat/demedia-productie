@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\User;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -28,6 +29,7 @@ class UserCreated implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
+            new Channel('users'),
             new PrivateChannel('users'),
         ];
     }
