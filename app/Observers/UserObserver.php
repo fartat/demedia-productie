@@ -13,7 +13,7 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        UserCreated::dispatch($user);
+        broadcast(new UserCreated($user))->toOthers();
     }
 
     /**
@@ -29,7 +29,7 @@ class UserObserver
      */
     public function deleted(User $user): void
     {
-        UserDeleted::dispatch($user->id, $user->name);
+        broadcast(new UserDeleted($user->id, $user->name))->toOthers();
     }
 
     /**

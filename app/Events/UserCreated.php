@@ -29,7 +29,6 @@ class UserCreated implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('users'),
             new PrivateChannel('users'),
         ];
     }
