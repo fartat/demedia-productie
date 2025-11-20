@@ -10,9 +10,8 @@ export default defineConfig(({ mode }) => {
     };
     if (mode !== 'development') {
         cmdWayfinder['command'] =
-            'ea-php83 artisan wayfinder:generate --with-form';
+            'ea-php83 artisan wayfinder:generate';
     }
-    console.log(mode)
 
     return {
         plugins: [
