@@ -46,6 +46,8 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'logo' => \Storage::url('images/DeMedia-500x160.png'),
+            'favicon' => \Storage::url('images/favicon.ico'),
         ];
     }
 }

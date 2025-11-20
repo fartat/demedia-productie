@@ -14,9 +14,9 @@ import { useState } from 'react';
 
 type DeleteUserProps = {
     user: User;
-    onDeleted?: () => void;
 };
-export default function DeleteUser({ user, onDeleted }: DeleteUserProps) {
+
+export default function DeleteUser({ user }: DeleteUserProps) {
     const [open, setOpen] = useState(false);
     const [deleting, setDeleting] = useState(false);
 
@@ -26,7 +26,7 @@ export default function DeleteUser({ user, onDeleted }: DeleteUserProps) {
         router.delete(destroy(user.id), {
             preserveScroll: true,
             onSuccess: () => {
-                onDeleted?.();
+
             },
             onError: () => {},
             onFinish: () => {

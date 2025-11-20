@@ -19,6 +19,7 @@ class UserCreated implements ShouldBroadcast
      */
     public function __construct(public User $user)
     {
+        $this->dontBroadcastToCurrentUser();
     }
 
     /**

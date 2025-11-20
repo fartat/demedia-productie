@@ -5,10 +5,27 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { initializeTheme } from './hooks/use-appearance';
-import { configureEcho } from '@laravel/echo-react';
+import { configureEcho, echo } from '@laravel/echo-react';
+import { router } from '@inertiajs/react';
 
 configureEcho({
     broadcaster: 'reverb',
+});
+
+router.on('before', (event) => {
+    const visit = event.detail.visit;
+    if (!visit) return;
+
+    const sock = echo();
+    if (!sock) return;
+
+    const socketId = sock.socketId();
+    if (!socketId) return;
+
+    visit.headers = {
+        ...(visit.headers || {}),
+        'X-Socket-ID': socketId,
+    };
 });
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';

@@ -27,6 +27,8 @@ export interface SharedData {
     quote: { message: string; author: string };
     auth: Auth;
     sidebarOpen: boolean;
+    logo: string;
+    favicon: string;
     [key: string]: unknown;
 }
 
@@ -41,3 +43,5 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export type NavEntry = NavItem | NavGroup;

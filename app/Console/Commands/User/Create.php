@@ -18,7 +18,8 @@ class Create extends Command
                             {email?}
                             {password?}
                             {--admin : Whether the user should be created as an admin}
-                            {--factory : Whether to create a user using the factory}';
+                            {--factory : Whether to create a user using the factory}
+                            {--factory-count=1 : Number of users to create}';
 
     /**
      * The console command description.
@@ -33,8 +34,9 @@ class Create extends Command
     public function handle()
     {
         if ($this->option('factory')) {
-            $user = User::factory()->create();
-            $this->info("Utilizatorul a fost creat cu succes: ID {$user->id}");
+            $count = (int)$this->option('factory-count');
+            $user = User::factory()->count($count)->create();
+            $this->info("Utilizatorul a fost creat cu succes: ID {$user->pluck('id')->implode(', ')}");
             return;
         }
 

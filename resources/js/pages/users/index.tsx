@@ -1,12 +1,11 @@
 import AppLayout from '@/layouts/app-layout';
-import userRoute from '@/routes/users';
+import {index as userIndex} from '@/routes/users';
 import { type BreadcrumbItem } from '@/types';
 import { Head, router } from '@inertiajs/react';
 import { useEcho } from '@laravel/echo-react';
 
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
+import {debounce} from 'lodash'
 import {
     Table,
     TableBody,
@@ -17,20 +16,32 @@ import {
 } from '@/components/ui/table';
 
 import DeleteUser from '@/pages/users/delete';
-import { Plus } from 'lucide-react';
+import { useEffect, useMemo } from 'react';
+import CreateUserDialog from '@/pages/users/create';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Utilizatori',
-        href: userRoute.index().url,
+        href: userIndex().url,
     },
 ];
 
 export default function Users({ users }: Users) {
-    useEcho('users', ['UserCreated', 'UserDeleted'], () => {
-        router.reload({ only: ['users'] });
-        
-    });
+    const reloadUsers = useMemo(
+        () =>
+            debounce(() => {
+                router.reload({ only: ['users'] });
+            }, 300),
+        []
+    )
+
+    useEcho('users', ['UserCreated', 'UserDeleted','UserUpdated'], reloadUsers);
+
+    useEffect(() => {
+        return () => {
+            reloadUsers.cancel();
+        };
+    }, [reloadUsers]);
 
     const renderItem = (user: User, index: number) => {
         return (
@@ -48,7 +59,7 @@ export default function Users({ users }: Users) {
                     {new Date(user.created_at).toLocaleString()}
                 </TableCell>
                 <TableCell className="text-sm font-normal text-neutral-500">
-                    <DeleteUser user={user} />
+                    <DeleteUser user={user}/>
                 </TableCell>
             </TableRow>
         );
@@ -60,10 +71,7 @@ export default function Users({ users }: Users) {
                 <Card>
                     <CardHeader>
                         <CardTitle>Utilizatori</CardTitle>
-                        <Button variant="outline">
-                            <Plus size={16} />
-                            Adauga utilizator
-                        </Button>
+                        <CreateUserDialog/>
                     </CardHeader>
                     <CardContent className="p-0">
                         <Table>

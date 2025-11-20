@@ -8,7 +8,7 @@ import AppLayout from '@/layouts/app-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 import { disable, enable, show } from '@/routes/two-factor';
 import { type BreadcrumbItem } from '@/types';
-import { Form, Head } from '@inertiajs/react';
+import { Form, Head, usePage } from '@inertiajs/react';
 import { ShieldBan, ShieldCheck } from 'lucide-react';
 import { useState } from 'react';
 
@@ -19,7 +19,7 @@ interface TwoFactorProps {
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Two-Factor Authentication',
+        title: 'Autentificare 2FA',
         href: show.url(),
     },
 ];
@@ -28,6 +28,7 @@ export default function TwoFactor({
     requiresConfirmation = false,
     twoFactorEnabled = false,
 }: TwoFactorProps) {
+
     const {
         qrCodeSvg,
         hasSetupData,
@@ -42,21 +43,20 @@ export default function TwoFactor({
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Two-Factor Authentication" />
+            <Head title="Autentificare 2FA" />
             <SettingsLayout>
                 <div className="space-y-6">
                     <HeadingSmall
-                        title="Two-Factor Authentication"
-                        description="Manage your two-factor authentication settings"
+                        title="Autentificare 2FA"
+                        description="Gestioneaza autentificarea in doi factori pentru contul tau."
                     />
                     {twoFactorEnabled ? (
                         <div className="flex flex-col items-start justify-start space-y-4">
-                            <Badge variant="default">Enabled</Badge>
+                            <Badge variant="default">Activat</Badge>
                             <p className="text-muted-foreground">
-                                With two-factor authentication enabled, you will
-                                be prompted for a secure, random pin during
-                                login, which you can retrieve from the
-                                TOTP-supported application on your phone.
+                                Cu autentificarea cu doi factori activată, vi se va solicita un cod PIN aleatoriu și securizat în timpul
+                                autentificării, pe care îl puteți recupera din
+                                aplicația acceptată de TOTP de pe telefon.
                             </p>
 
                             <TwoFactorRecoveryCodes
@@ -73,7 +73,7 @@ export default function TwoFactor({
                                             type="submit"
                                             disabled={processing}
                                         >
-                                            <ShieldBan /> Disable 2FA
+                                            <ShieldBan /> Dezactivati 2FA
                                         </Button>
                                     )}
                                 </Form>
@@ -81,12 +81,11 @@ export default function TwoFactor({
                         </div>
                     ) : (
                         <div className="flex flex-col items-start justify-start space-y-4">
-                            <Badge variant="destructive">Disabled</Badge>
+                            <Badge variant="destructive">Dezactivat</Badge>
                             <p className="text-muted-foreground">
-                                When you enable two-factor authentication, you
-                                will be prompted for a secure pin during login.
-                                This pin can be retrieved from a TOTP-supported
-                                application on your phone.
+                                Când activați autentificarea cu doi factori, vi se va solicita un cod PIN securizat la conectare.
+                                Acest cod PIN poate fi recuperat dintr-o aplicație compatibilă cu TOTP
+                                de pe telefon.
                             </p>
 
                             <div>
@@ -95,7 +94,7 @@ export default function TwoFactor({
                                         onClick={() => setShowSetupModal(true)}
                                     >
                                         <ShieldCheck />
-                                        Continue Setup
+                                        Continuati configurarea
                                     </Button>
                                 ) : (
                                     <Form
@@ -110,7 +109,7 @@ export default function TwoFactor({
                                                 disabled={processing}
                                             >
                                                 <ShieldCheck />
-                                                Enable 2FA
+                                                Activeaza 2FA
                                             </Button>
                                         )}
                                     </Form>

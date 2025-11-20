@@ -95,7 +95,7 @@ function TwoFactorSetupStep({
                     <div className="relative flex w-full items-center justify-center">
                         <div className="absolute inset-0 top-1/2 h-px w-full bg-border" />
                         <span className="relative bg-card px-2 py-1">
-                            or, enter the code manually
+                            sau introduceți codul manual
                         </span>
                     </div>
 
@@ -252,27 +252,27 @@ export default function TwoFactorSetupModal({
     }>(() => {
         if (twoFactorEnabled) {
             return {
-                title: 'Two-Factor Authentication Enabled',
+                title: 'Autentificare 2FA activată',
                 description:
-                    'Two-factor authentication is now enabled. Scan the QR code or enter the setup key in your authenticator app.',
-                buttonText: 'Close',
+                    'Autentificarea 2FA este acum activată. Scanați codul QR sau introduceți cheia de configurare în aplicația de autentificare.',
+                buttonText: 'Inchide',
             };
         }
 
         if (showVerificationStep) {
             return {
-                title: 'Verify Authentication Code',
+                title: 'Verificați codul de autentificare',
                 description:
-                    'Enter the 6-digit code from your authenticator app',
-                buttonText: 'Continue',
+                    'Introduceți codul de 6 cifre din aplicația de autentificare',
+                buttonText: 'Continua',
             };
         }
 
         return {
-            title: 'Enable Two-Factor Authentication',
+            title: 'Activați autentificarea 2FA',
             description:
-                'To finish enabling two-factor authentication, scan the QR code or enter the setup key in your authenticator app',
-            buttonText: 'Continue',
+                'Pentru a finaliza activarea autentificării 2FA, scanați codul QR sau introduceți cheia de configurare în aplicația de autentificare.',
+            buttonText: 'Continua',
         };
     }, [twoFactorEnabled, showVerificationStep]);
 

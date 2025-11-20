@@ -11,35 +11,47 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
-import { type NavItem } from '@/types';
+import { index as roleIndex } from '@/routes/roles';
+import { index as userIndex } from '@/routes/users';
+import { NavEntry, type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, UserCog } from 'lucide-react';
+import { LayoutGrid, UserCog } from 'lucide-react';
 import AppLogo from './app-logo';
 
-const mainNavItems: NavItem[] = [
+const mainNavItems: NavEntry[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
     },
     {
-        title: 'Users',
-        href: '/users',
-        icon: UserCog,
-    }
+        title: 'Utilizatori',
+        items: [
+            {
+                title: 'Lista Utilizatori',
+                href: userIndex(),
+                icon: UserCog,
+            },
+            {
+                title: 'Roluri și Permisiuni',
+                href: roleIndex(),
+                icon: UserCog,
+            },
+        ],
+    },
 ];
 
 const footerNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
-    },
+    // {
+    //     title: 'Repository',
+    //     href: 'https://github.com/laravel/react-starter-kit',
+    //     icon: Folder,
+    // },
+    // {
+    //     title: 'Documentation',
+    //     href: 'https://laravel.com/docs/starter-kits#react',
+    //     icon: BookOpen,
+    // },
 ];
 
 export function AppSidebar() {
@@ -58,7 +70,9 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                {mainNavItems.map((entry, index) => (
+                    <NavMain group={entry} key={index} />
+                ))}
             </SidebarContent>
 
             <SidebarFooter>

@@ -57,11 +57,10 @@ export default function TwoFactorRecoveryCodes({
             <CardHeader>
                 <CardTitle className="flex gap-3">
                     <LockKeyhole className="size-4" aria-hidden="true" />
-                    2FA Recovery Codes
+                    2FA Coduri de recuperare
                 </CardTitle>
                 <CardDescription>
-                    Recovery codes let you regain access if you lose your 2FA
-                    device. Store them in a secure password manager.
+                    Codurile de recuperare vă permit să redobândiți accesul dacă vă pierdeți dispozitivul 2FA. Stocați-le într-un manager de parole securizat.
                 </CardDescription>
             </CardHeader>
             <CardContent>
@@ -76,7 +75,7 @@ export default function TwoFactorRecoveryCodes({
                             className="size-4"
                             aria-hidden="true"
                         />
-                        {codesAreVisible ? 'Hide' : 'View'} Recovery Codes
+                        {codesAreVisible ? 'Ascunde' : 'Vizualizare'} coduri de recuperare
                     </Button>
 
                     {canRegenerateCodes && (
@@ -92,7 +91,7 @@ export default function TwoFactorRecoveryCodes({
                                     disabled={processing}
                                     aria-describedby="regenerate-warning"
                                 >
-                                    <RefreshCw /> Regenerate Codes
+                                    <RefreshCw />Regenerați coduri
                                 </Button>
                             )}
                         </Form>
@@ -145,13 +144,13 @@ export default function TwoFactorRecoveryCodes({
 
                                 <div className="text-xs text-muted-foreground select-none">
                                     <p id="regenerate-warning">
-                                        Each recovery code can be used once to
-                                        access your account and will be removed
-                                        after use. If you need more, click{' '}
+                                        Fiecare cod de recuperare poate fi folosit o singură dată pentru a
+                                        accesa contul dvs. și va fi eliminat
+                                        după utilizare. Dacă aveți nevoie de mai mult, click{' '}
                                         <span className="font-bold">
-                                            Regenerate Codes
+                                            Regenerați coduri
                                         </span>{' '}
-                                        above.
+                                        mai sus.
                                     </p>
                                 </div>
                             </>
