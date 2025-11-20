@@ -12,6 +12,7 @@ export default defineConfig(({ mode }) => {
         cmdWayfinder['command'] =
             'ea-php83 artisan wayfinder:generate --with-form';
     }
+    console.log(mode)
 
     return {
         plugins: [
