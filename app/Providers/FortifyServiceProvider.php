@@ -53,18 +53,19 @@ class FortifyServiceProvider extends ServiceProvider
             'status' => $request->session()->get('status'),
         ]));
 
-        Fortify::resetPasswordView(fn (Request $request) => Inertia::render('auth/reset-password', [
-            'email' => $request->email,
-            'token' => $request->route('token'),
-        ]));
-
-        Fortify::requestPasswordResetLinkView(fn (Request $request) => Inertia::render('auth/forgot-password', [
-            'status' => $request->session()->get('status'),
-        ]));
-
-        Fortify::verifyEmailView(fn (Request $request) => Inertia::render('auth/verify-email', [
-            'status' => $request->session()->get('status'),
-        ]));
+        //Disable default views for password reset and email verification
+//        Fortify::resetPasswordView(fn (Request $request) => Inertia::render('auth/reset-password', [
+//            'email' => $request->email,
+//            'token' => $request->route('token'),
+//        ]));
+//
+//        Fortify::requestPasswordResetLinkView(fn (Request $request) => Inertia::render('auth/forgot-password', [
+//            'status' => $request->session()->get('status'),
+//        ]));
+//
+//        Fortify::verifyEmailView(fn (Request $request) => Inertia::render('auth/verify-email', [
+//            'status' => $request->session()->get('status'),
+//        ]));
 
         Fortify::twoFactorChallengeView(fn () => Inertia::render('auth/two-factor-challenge'));
 

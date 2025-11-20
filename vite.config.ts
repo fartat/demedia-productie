@@ -2,13 +2,16 @@ import { wayfinder } from '@laravel/vite-plugin-wayfinder';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 
 export default defineConfig(({ mode }) => {
     const cmdWayfinder: Record<string, boolean | string> = {
         formVariants: true,
     };
-    if (mode !== 'development') {
+
+    const env = loadEnv(mode, process.cwd(), '')
+
+    if (mode !== 'development' && env.APP_ENV === 'production') {
         cmdWayfinder['command'] =
             'ea-php83 artisan wayfinder:generate';
     }
